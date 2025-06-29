@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import React from "react";
+// import { useState , useEffect } from "react";
+// import axios from "axios";
 
+import './api/api.tsx'
+
+import "./App.css"
+import tmdb_search from "./api/api.tsx"
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+  const movies = tmdb_search('F1');
+  console.log(movies);
+  return(
+    <body>
+    <nav>
+      <title>MovieEcho</title>
+      <h1>MovieEcho</h1>
+      <h2>A site that searches form similar movies</h2>
+    </nav>
+    <main>
+      <form>
+        <input type="search" name="" id="" placeholder="Enter your favourite movie title"/>
+        <input type="submit" value="Send"  />
+        
+      </form>
+    </main>
+    </body>
   )
-}
 
+}
 export default App
