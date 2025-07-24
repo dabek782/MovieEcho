@@ -1,31 +1,18 @@
-// import React from "react";
-// import { useState , useEffect } from "react";
-// import axios from "axios";
-
-import './api/api.tsx'
-
-import "./App.css"
-import tmdb_search from "./api/api.tsx"
-function App() {
-
-  const movies = tmdb_search('F1');
-  console.log(movies);
+import React from "react";
+import MovieCard from "./front/moviecard";
+function App(){
+ interface MovieData{
+  Title:string,
+  Year:number
+   Poster ?: string
+ }
+ const movie : MovieData = {
+  Title: "Vinci 2",
+  Year : 2025,
+  Poster : "https://www.multikino.pl/-/jssmedia/multikino/images/film-and-events/2025/vinci-2/vinci_2_plakat-cut.jpg?mw=450&rev=4cc73e45905d4343970e8d955a3cdbd1"
+ };
   return(
-    <body>
-    <nav>
-      <title>MovieEcho</title>
-      <h1>MovieEcho</h1>
-      <h2>A site that searches form similar movies</h2>
-    </nav>
-    <main>
-      <form>
-        <input type="search" name="" id="" placeholder="Enter your favourite movie title"/>
-        <input type="submit" value="Send"  />
-        
-      </form>
-    </main>
-    </body>
+    <MovieCard  {...movie} />
   )
-
 }
-export default App
+export default App    
