@@ -1,26 +1,20 @@
-import React from "react";
-import { Heart } from "react-bootstrap-icons";
-interface Movie {
-    Title : string,
-    Year : number,
-    Poster ?: string
-}
 
-function MovieCard(movie:Movie){
-    function favourite(){
-        alert('click')
-    }
+import { Heart } from "react-bootstrap-icons";
+import {Movie , Props} from "../types/interfaces"
+
+function MovieCard(movie:Movie , {ClickHandler}:Props){
+
     return (<div className="MovieTile">
         <div className="MoviePoster">
-            <img src={movie.Poster} alt={movie.Title}/>
+            <img src={movie.Poster} alt={movie.title}/>
             <div className="MovieOverlay">
-                <button className="ButtonLike" onClick={favourite}>
-                    <Heart size={24}></Heart>
+                <button className="ButtonLike">
+                    <Heart size={24} onClick={ClickHandler}></Heart>
                 </button>
             </div>
         </div>
         <div className="MovieInfo">
-            <h3>{movie.Title}</h3>
+            <h3>{movie.title}</h3>
             <h3>{movie.Year}</h3>
         </div>
       
