@@ -1,4 +1,4 @@
-//This file handles all interfaces for the file
+//This file handles all interfaces for the project
 export  interface Movie {
     title : string,
     Year : number,
