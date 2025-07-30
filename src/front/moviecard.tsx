@@ -1,4 +1,4 @@
-
+//File that handles how each movie look 
 import { HeartFill } from "react-bootstrap-icons";
 import {Movie , Props} from "../types/interfaces"
 
@@ -9,7 +9,7 @@ function MovieCard(movie:Movie , {ClickHandler}:Props){
                 {movie.Poster ? (
                     <img 
                         src={movie.Poster} 
-                        className="w-full h-full object-cover" 
+                        className="w-78 h-80 object-cover" 
                         alt={movie.title}
 
                     />
@@ -29,11 +29,12 @@ function MovieCard(movie:Movie , {ClickHandler}:Props){
             
             <h3 className="font-semibold text-white mb-1 line-clamp-1">{movie.title}</h3>
             <h3 className="text-sm text-center text-gray-500 mb-3">{movie.Year}</h3>
-        
+                
             </div>
         </div>
        </div>
       
     </div>
+    /*That code makes movie card there is conditional that handles if given movie does not have a poster and in the future mechanism of adding favourite movies will be implemented */
 )}
 export default MovieCard

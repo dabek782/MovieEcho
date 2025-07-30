@@ -1,6 +1,7 @@
+//This file handles favourites tab
 import MovieCard from "./moviecard"; 
 import HomePage from "./homepage";
-import {Movie , Props} from "../types/interfaces"
+import {Movie } from "../types/interfaces"
 import NavBar from "./navbar";
 function Favourite():JSX.Element{
     return(
