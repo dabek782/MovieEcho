@@ -6,11 +6,13 @@ import {Search, } from "react-bootstrap-icons"//Icon for searching
 import {Movie} from "../types/interfaces"//Interface for movie
 import NavBar from "./navbar"//Navbar
 import { fetchMovies } from "../back/services" //Function that handles api
+import useFavourites from "../hook/useFavourites"
 function HomePage(){
     const [movies , setMovies] = useState<Movie[]>()//Array that holds these movies
     const [isLoading , setIsLoading] = useState(false)//Boloean for is data is loading
-    const [isError , setIsError] = useState()//Tells if error is happening
+    const [isError , setIsError] = useState<unknown>()//Tells if error is happening
     const [SearchQuery , setSearchQuery] = useState("");//Hold search query
+    const {toggleFavourite , isFavourite} = useFavourites();
     const HandleSearch = async (e:React.FormEvent)=>{
     e.preventDefault()
     if(!SearchQuery.trim()) return;
@@ -24,15 +26,11 @@ function HomePage(){
         console.log('Total Results:', res.totalResults); 
         setMovies(res.Movie);
 
-  
     }
-    catch(e:any){
-        setIsError(e.target.value)
+    catch(e:unknown){
+        setIsError(e)
         console.error(e)
         throw(e)
-        
-
-
     }
     finally{
         setIsLoading(false)
@@ -42,7 +40,7 @@ function HomePage(){
     }
 
     return(
-    <div className="bg-[#DFD0B8]">
+    <div className=" min-h-screenbg-[#DFD0B8]">
     <NavBar />
      <div className="m-4 p-8 ">
         <div className="flex justify-center group" >
@@ -52,11 +50,18 @@ function HomePage(){
             </form> {/* Form that gives me a title that user wants to search */}
         </div> { /* Conditional for loading */}
                 {isLoading == true && <div className="m-4 p-8 text-2xl text-center"> The Movies are loading please wait </div>}
-        <div className="grid grid-cols-4 grid-rows-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3  lg:grid-cols-4 gap-10">
         {/*Outputs data like title poster year etc. */}
         {movies?.filter(movies => movies.title.toLowerCase().includes(SearchQuery.toLowerCase())
-        ).map((movies, index ) => (
-            <MovieCard{...movies} key={index}/>))}
+        ).map((movies) => (
+            <MovieCard{...movies} key={movies.Id}
+            onFavouriteClick={toggleFavourite}
+            isFavourite={isFavourite(movies.Id)
+            
+            }
+            
+            
+            />))}
 
          
         </div>

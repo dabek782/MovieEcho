@@ -1,7 +1,8 @@
 //This file handles all interfaces for the project
 export  interface Movie {
+    Id:number,
     title : string,
-    Year : number,
+    Year : string,
     Poster ?: string
     Favourite ?:boolean
 } //Interface for movies 
@@ -11,6 +12,6 @@ export type Props = {
 export interface TMDBMovie{
     id:number,
     title:string
-    year:string
-    poster:string|null
+    release_date:string
+    poster_path?:string
 }//Interface for handling fetching

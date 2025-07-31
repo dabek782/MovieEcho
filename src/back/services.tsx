@@ -22,15 +22,15 @@ const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';//Url that gives me pos
             const  transformData:Movie[] = info.results?.map((movie:TMDBMovie) => ({
                 id: movie.id,
                 title: movie.title,
-                Year: movie.year?.split('-')[0] || 'Unknown',
-                Poster: movie.poster ? `${IMAGE_BASE_URL}${movie.poster}` : null,
+                Year: movie.release_date?.split('-')[0] || 'Unknown',
+                Poster: movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : null,
 
-            }), [])
+            }))
             return {
                 Movie : transformData,
                 totalPages: info.total_pages,
                 currentPage : info.page , 
-                totalResults : info.total_res
+                totalResults : info.total_results
             }
         }
         //returning date 

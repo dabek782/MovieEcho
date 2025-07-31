@@ -1,8 +1,15 @@
 //File that handles how each movie look 
-import { HeartFill } from "react-bootstrap-icons";
-import {Movie , Props} from "../types/interfaces"
-
-function MovieCard(movie:Movie , {ClickHandler}:Props){
+import { Heart, HeartFill } from "react-bootstrap-icons";
+import {Movie } from "../types/interfaces"
+import useFavourites from "../hook/useFavourites";
+interface MovieCardProps extends Movie{
+    isFavourite : boolean,
+    onFavouriteClick: (movie:Movie)=> void
+}
+function MovieCard({onFavouriteClick,isFavourite,...movie}:MovieCardProps){
+    const HandleFavourite = ()=>{
+        onFavouriteClick(movie)
+    }
 
     return (<div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all overflow-hidden w-78">
         <div className="relative h-80 group">
@@ -22,8 +29,8 @@ function MovieCard(movie:Movie , {ClickHandler}:Props){
                 )}
             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
             <div className="flex space-x-3"></div>
-                <button className="bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-red-500 transition-colors">
-                    <HeartFill size={16} onClick={ClickHandler}></HeartFill>
+                <button className="bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-red-500 transition-colors" onClick={HandleFavourite}>
+                    {isFavourite ? <HeartFill/> : <Heart/>}
                 </button>
             <div className="p-4">
             

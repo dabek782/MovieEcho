@@ -5,7 +5,7 @@ import { Heart } from "react-bootstrap-icons"
 
 function NavBar() :JSX.Element{
     return (
-    <div className="flex   p-8 box-border  shadow-2xl shadow-black justify-around bg-[#222831]  text-2xl text-white">
+    <div className="flex   p-8 box-border  shadow-2xs shadow-black justify-around bg-[#222831]  text-2xl text-white">
 
       <Link to = "/"><h2 className="text-center" >MovieEcho</h2></Link>
       <div className="group cursor-pointer relative  align-middle">
