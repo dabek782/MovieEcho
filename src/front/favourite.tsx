@@ -1,50 +1,44 @@
-//File that handles how each movie look 
-import { Heart, HeartFill } from "react-bootstrap-icons";
-import {Movie } from "../types/interfaces"
 
+import {Movie } from "../types/interfaces"
+import NavBar from "./navbar";
+import MovieCard from "./moviecard";
+import useFavourites from "../hook/useFavourites";
+import { Key } from "react-bootstrap-icons";
 interface MovieCardProps extends Movie{
     isFavourite : boolean,
     onFavouriteClick: (movie:Movie)=> void
 }
-function MovieCard({onFavouriteClick,isFavourite,...movie}:MovieCardProps){
-    const HandleFavourite = ()=>{
-        onFavouriteClick(movie)
-    }
 
+function Favourite(){
+    const {Favourties , toggleFavourite , isFavourite} = useFavourites()
     return (
-        <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all overflow-hidden w-78">
-            <div className="relative h-80 group">
-                {movie.Poster ? (
-                    <img 
-                        src={movie.Poster} 
-                        className="w-78 h-80 object-cover" 
-                        alt={movie.title}
+
+        <div className=" min-h-screenbg-[#DFD0B8]">
+            <NavBar/>
+             <div className="m-4">
+                <h1 className="text-2xl text-center mb-8 ">Your favourite movies</h1>
+             </div>
+             {Favourties.length === 0 ? (
+                <h1 className="text-2xl text-center mb-8 ">Start adding your favourites movies</h1>
+             ) : (
+                 <div className="grid grid-cols-1 grid-rows-6 gap-3 mt-3  md:grid-rows-5  md:grid-cols-2 md:gap-4 md:ml-5 lg:grid-cols-4  lg:grid-rows-4 lg: gap:8 " > 
+                    {Favourties.map((movie) => (
+                    <MovieCard
+                    {...movie}
+                    key={movie.id}
+                    onFavouriteClick={toggleFavourite}
+                    isFavourite={isFavourite(movie.id)}
+               
                     />
-                ) : (
-                    <div className="w-full h-full bg-black flex items-center justify-center">
-                        <span className="text-white text-center p-4">
-                            No Image Available
-                        </span>
-                    </div>
+                    ))}
+
+                 </div>
+
+          
                 )}
-                {/* Overlay that appears on hover */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <button 
-                        className="bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-red-500 transition-colors" 
-                        onClick={HandleFavourite}
-                    >
-                        {isFavourite ? <HeartFill/> : <Heart/>}
-                    </button>
-                </div>
-            </div>
-            
-            {/* Movie info below the image */}
-            <div className="p-4">
-                <h3 className="font-semibold text-gray-800 mb-1 line-clamp-1">{movie.title}</h3>
-                <p className="text-sm text-gray-500 mb-3">{movie.Year}</p>
-            </div>
         </div>
+
     );
 }
 
-export default MovieCard
+export default Favourite

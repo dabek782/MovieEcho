@@ -45,25 +45,21 @@ function HomePage(){
      <div className="m-4 p-8 ">
         <div className="flex justify-center group" >
             <form onSubmit={HandleSearch} >
-                <input type="text" value = {SearchQuery} onChange = {(e) => setSearchQuery(e.target.value)} className="border-1 rounded-md m-4 text-center hover:shadow-black shadow-2xl" placeholder="Enter you movie title" />
-                <button type="submit"><Search/></button> 
+                <input type="text" value = {SearchQuery} onChange = {(e) => setSearchQuery(e.target.value)} className="border-1 rounded-md mr-1.5 text-center hover:shadow-black shadow-2xl md:m-2 lg:m-6" placeholder="Enter you movie title" />
+                <button type="submit"><Search className="sm:w-2 sm:h-2 md:w-4 md:h-4 md:text-center lg:w-4lg:h-4"/></button> 
             </form> {/* Form that gives me a title that user wants to search */}
         </div> { /* Conditional for loading */}
                 {isLoading == true && <div className="m-4 p-8 text-2xl text-center"> The Movies are loading please wait </div>}
-        <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3  lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 grid-rows-6 gap-3 mt-3  md:grid-rows-5  md:grid-cols-2 md:gap-4 md:ml-5 lg:grid-cols-4  lg:grid-rows-4 lg: gap:8 " >
         {/*Outputs data like title poster year etc. */}
-        {movies?.filter(movies => movies.title.toLowerCase().includes(SearchQuery.toLowerCase())
-        ).map((movies) => (
-            <MovieCard{...movies} key={movies.Id}
+        {movies?.map((movies) => (
+            <MovieCard{...movies} key={movies.id}
             onFavouriteClick={toggleFavourite}
-            isFavourite={isFavourite(movies.Id)
-            
+            isFavourite={isFavourite(movies.id)
             }
-            
-            
             />))}
+   
 
-         
         </div>
     </div>
     </div>

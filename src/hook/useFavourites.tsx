@@ -11,20 +11,23 @@ const useFavourites = ()=>{
     },[])
     useEffect(() =>{
         localStorage.setItem("movieFavourites" , JSON.stringify(Favourties))
-
+        console.log(Favourties)
     }, [Favourties])
     const addFavourite = (movie:Movie) => {
         SetIsFavourites(prev=>[...prev,movie])
+        console.log(movie)
+
     }
 
     const removeFavourite = (Id:number) =>{
-        SetIsFavourites(prev=>prev.filter((M:Movie) => M.Id !== Id ))
+        SetIsFavourites(prev=>prev.filter((M:Movie) => M.id !== Id ))
 
     }
     const toggleFavourite = (movie:Movie) =>{
-        const isAlreadyFavorite = Favourties.some(M=>M.Id===movie.Id);
+        const isAlreadyFavorite = Favourties.some(M=>M.id===movie.id);
+
         if(isAlreadyFavorite){
-            removeFavourite(movie.Id)
+            removeFavourite(movie.id)
         }
         if(!isAlreadyFavorite){
             addFavourite(movie);
@@ -32,7 +35,8 @@ const useFavourites = ()=>{
 
     } 
     const isFavourite= (movieId:number)=>{
-        return Favourties.some(M=> M.Id === movieId)
+        return Favourties.some(M=> M.id === movieId)
+        
     }
     return{
         Favourties,

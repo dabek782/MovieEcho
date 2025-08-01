@@ -1,6 +1,6 @@
 //This file handles all interfaces for the project
 export  interface Movie {
-    Id:number,
+    id:number,
     title : string,
     Year : string,
     Poster ?: string
