@@ -5,7 +5,7 @@ const BASE_URL = 'https://api.themoviedb.org/3/search/movie?query=';//Base url f
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';//Url that gives me poster for movies 
 
 
-    export   const fetchMovies = async (query:string )=>{
+    export   const fetchMovies = async (query:string , page:number )=>{
          try{
             //  setIsLoading(true)
             const options = {
@@ -15,7 +15,7 @@ const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';//Url that gives me pos
                     Authorization : `Bearer ${API} `
                 }
             }//Authentification if that is not included you won't get any data
-            const response = await fetch(`${BASE_URL}${query}` , options)
+            const response = await fetch(`${BASE_URL}${query}&page=${page}` , options)
             const info  = await response.json()
             console.log(response)
             console.log(info)

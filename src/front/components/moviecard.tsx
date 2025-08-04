@@ -1,6 +1,6 @@
 //File that handles how each movie look 
 import { Heart, HeartFill } from "react-bootstrap-icons";
-import {Movie } from "../types/interfaces"
+import {Movie } from "../../types/interfaces"
 
 interface MovieCardProps extends Movie{
     isFavourite : boolean,

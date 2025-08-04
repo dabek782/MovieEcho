@@ -1,6 +1,6 @@
 //This file makes navbar
 import { Link } from "react-router-dom"
-import "../css/style.css"
+import "../../css/style.css"
 import { Heart } from "react-bootstrap-icons"
 
 function NavBar() :JSX.Element{

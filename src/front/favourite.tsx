@@ -1,13 +1,7 @@
-
-import {Movie } from "../types/interfaces"
-import NavBar from "./navbar";
-import MovieCard from "./moviecard";
+import NavBar from "./components/navbar";
+import MovieCard from "./components/moviecard";
 import useFavourites from "../hook/useFavourites";
-import { Key } from "react-bootstrap-icons";
-interface MovieCardProps extends Movie{
-    isFavourite : boolean,
-    onFavouriteClick: (movie:Movie)=> void
-}
+
 
 function Favourite(){
     const {Favourties , toggleFavourite , isFavourite} = useFavourites()
