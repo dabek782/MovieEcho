@@ -34,6 +34,7 @@ function HomePage(){
         setTotalPages(res.totalPages)
         setTotalResults(res.totalResults)
         setCurrentPage(page)
+     
 
     }
     catch(e:unknown){
@@ -53,8 +54,10 @@ function HomePage(){
             const fakeEvent = {preventDefault : () => {}} as React.FormEvent
             HandleSearch(fakeEvent , newPage)
         } 
+  
     }
-
+  const NumPagePrev:number = currentPage -1
+  const NumPageNext:number  =currentPage +1
     return(
     <div className=" min-h-screenbg-[#DFD0B8]">
     <NavBar />
@@ -81,24 +84,29 @@ function HomePage(){
             isFavourite={isFavourite(movies.id)
             }
             />))}
+
+        </div>
+    </div>
+            <div className="flex flex-row justify-center  text-center rounded  mt-5 pr-25 content-center w-full">
         {total_pages&& total_pages >=1 && !isLoading && (
-            <div className="flex flex-row  justify-center align-middle items-center mt-10">
-                <Button onClick={()=>HandlePageSwitch(currentPage -1)} disabled={currentPage == 1} ><ChevronBarLeft className="mr-3"/></Button>
-                {[...Array(Math.min(5,total_pages))].map((_,i)=>{
-                    const pageNum = i+1
-                    return(
-                      <button key={pageNum} onClick={()=>HandlePageSwitch(pageNum)} className="flex items-center gap-5 px-3 py-5 rounded-2xl text-center"
-                      >{pageNum}</button>
-                    )
-                })}
-                <Button onClick={()=>HandlePageSwitch(currentPage +1)} disabled={currentPage == total_pages} ><ChevronBarRight className="ml-3"/></Button>
+            <div className="flex flex-row  justify-center align-middle space-x-4 items-center ml-10 mt-5">
+                <Button onClick={()=>HandlePageSwitch(NumPagePrev)} className="px-4 py-2" disabled={currentPage == 1} ><ChevronBarLeft /></Button>
+                
+                <div className="flex justify-center flex-row">{currentPage && currentPage == 1 && !isLoading && (
+                    <div className="flex justify-center flex-row px-4 py-2"><button>{currentPage}</button> <button onClick={()=> HandlePageSwitch((NumPageNext))}> {NumPageNext}</button></div>
+                )}
+                {currentPage && currentPage != 1 && NumPageNext <= total_pages &&!isLoading && (
+                    <div className="flex justify-center flex-row"><button onClick={()=>HandlePageSwitch(NumPagePrev)}>{NumPagePrev}</button> <button>{currentPage}</button> <button onClick={()=> HandlePageSwitch((NumPageNext))}> {NumPageNext}</button></div>
+                )}</div>
+                {NumPageNext && NumPageNext > total_pages && !isLoading&& (
+                    <div className="flex justify-center flex-row text-center space-x-2 px-3 py-2"><button onClick={()=> HandlePageSwitch((NumPagePrev))}> {NumPagePrev}</button> <button>{currentPage}</button> </div>
+                )}
+                <Button onClick={()=>HandlePageSwitch(currentPage +1)} disabled={currentPage == total_pages} ><ChevronBarRight className="ml-2 space-x-2"/></Button>
             </div>
         )
         }
    
-
         </div>
-    </div>
     </div>
 )}
 export default HomePage
